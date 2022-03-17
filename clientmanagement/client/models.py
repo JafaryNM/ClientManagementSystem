@@ -23,6 +23,9 @@ class Client(models.Model):
 class ServicesCategory(models.Model):
     name=models.CharField(max_length=150, null=True)
     
+    def __str__(self):
+        return self.name
+    
 class Project(models.Model):
     name= models.CharField(max_length = 150)
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
