@@ -67,14 +67,17 @@ class CreateServicesCategories(CreateView):
     success_url='/'
     
     
-#Update New Services Categories
+# Update New Services Categories
  
 class UpdateServicesCategories(UpdateView):
     model=ServicesCategory
     template_name='services/form.html'
     fields='__all__'
     success_url='/'
-    
+
+# Delete Services
 class DeleteServicesCategories(DeleteView):
     model=ServicesCategory
     success_url='/'
+    
+########## CLIENT CRUD #############
