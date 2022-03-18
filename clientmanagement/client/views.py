@@ -1,11 +1,6 @@
-from dataclasses import fields
-from multiprocessing import context
-from pyexpat import model
-from typing import List
-from django.shortcuts import render
 
 from .models import *
-
+from django.urls import reverse_lazy
 from django.views.generic import TemplateView, ListView, CreateView,UpdateView,DeleteView
 
 # Create your views here.
@@ -29,21 +24,21 @@ class CreateIndustry(CreateView):
     model=Industry
     template_name='industry/form.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('industries')
    
    
 # Update Industry
 
 class UpdateIndustry(UpdateView):
     model=Industry
-    template_name='industry/form.html'
+    template_name='industry/updateform.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('industries')
 
 # Delete Industry
 class DeleteIndustry(DeleteView):
      model=Industry
-     success_url='/'
+     success_url= reverse_lazy('industries')
      
      
      
@@ -67,21 +62,21 @@ class CreateServicesCategories(CreateView):
     model=ServicesCategory
     template_name='services/form.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('services')
     
     
 # Update New Services Categories
  
 class UpdateServicesCategories(UpdateView):
     model=ServicesCategory
-    template_name='services/form.html'
+    template_name='services/updateform.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('services')
 
 # Delete Services
 class DeleteServicesCategories(DeleteView):
     model=ServicesCategory
-    success_url='/'
+    success_url=reverse_lazy('services')
     
 ########## CLIENT CRUD #############
 
@@ -101,7 +96,7 @@ class CreateClient(CreateView):
     model=Client
     template_name='client/form.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('clients')
     
 #Update Client
 
@@ -109,8 +104,48 @@ class UpdateClient(UpdateView):
     model=Client
     template_name='client/updateform.html'
     fields='__all__'
-    success_url='/'
+    success_url=reverse_lazy('clients')
     
 class DeleteClient(DeleteView):
     model=Client
-    success_url='/'
+    success_url=reverse_lazy('clients')
+    
+
+############ PROJECT URL ###############
+
+#List Of All Projects
+
+class DisplayProjects(ListView):
+    model=Project
+    template_name='project/all_projects.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(DisplayProjects, self).get_context_data(**kwargs)
+        context['projects']=Project.objects.all()
+        return context
+    
+
+#Create New Project
+    
+class CreateProjects(CreateView):
+    model=Project
+    template_name='project/formcreate.html'
+    fields='__all__'
+    success_url=reverse_lazy('projects')
+    
+# Update Project
+
+class UpdateProject(UpdateView):
+    model=Project
+    template_name='project/updateform.html'
+    fields='__all__'
+    success_url=reverse_lazy('projects')
+    
+# Delete Project
+class DeleteProject(DeleteView):
+    model=Project
+    success_url=reverse_lazy('projects')
+    
+    
+######### DISPLAY ALL PROJECTS ##############
+    
