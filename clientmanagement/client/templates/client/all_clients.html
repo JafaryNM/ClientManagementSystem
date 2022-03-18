@@ -7,11 +7,12 @@
        
         
             <div class="card-header">
-                <h4 class="card-title">Services</h4>
-                <a class="btn btn-success pull-right m-2 pull-left"  href=" {% url 'createservices' %}">Add Services</a></div>
+                <h4 class="card-title">Clients</h4>
+                <a class="btn btn-success pull-right m-2 pull-left"  href=" {% url 'createclient' %}">Add Client</a></div>
                 
                   
             </div>
+            
             <div class="card-body">
                
                 <div class="table-responsive">
@@ -21,26 +22,29 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Industry</th>
                                 <th>Action</th>
 
                             </tr>
                         </thead>
                         <tbody>
-                            {% for service in services %}
+
+                            {% for client in clients %}
                               
                             
                             <tr>
                                 <td>{{forloop.counter}}</td>
-                                <td>{{service.name}}</td>
-                                <td>
+                                <td>{{client.name}}</td>
+                                <td>{{client.industry}}</td>
+                               <td>
+                                    
+                                    <a href="{% url 'clientupdate' client.id %}" ><i class="fas fa-edit"></i></a>
+                                    <a href=" {% url 'clientdelete' client.id %}""><i class="fas fa-trash-alt"></i></a>
                                    
-                                    <a href="{% url 'serviceupdate' service.id %}" ><i class="fas fa-edit"></i></a>
-                                    <a href="{% url 'servicedelete' service.id %}"><i class="fas fa-trash-alt"></i></a>
-
                                 </td>
-                              
                             
                                
+                            </tr>
                             
                             {% endfor %}
                               

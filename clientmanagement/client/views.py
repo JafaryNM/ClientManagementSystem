@@ -1,4 +1,7 @@
+from dataclasses import fields
+from multiprocessing import context
 from pyexpat import model
+from typing import List
 from django.shortcuts import render
 
 from .models import *
@@ -13,7 +16,7 @@ from django.views.generic import TemplateView, ListView, CreateView,UpdateView,D
 #List All Industry
 class DisplayIndustry(ListView):
     model=Industry
-    template_name='client/all_client.html'
+    template_name='industry/all_industry.html'
     
     def get_context_data(self, **kwargs):
         context = super(DisplayIndustry, self).get_context_data(**kwargs)
@@ -24,7 +27,7 @@ class DisplayIndustry(ListView):
 
 class CreateIndustry(CreateView):
     model=Industry
-    template_name='client/form.html'
+    template_name='industry/form.html'
     fields='__all__'
     success_url='/'
    
@@ -33,7 +36,7 @@ class CreateIndustry(CreateView):
 
 class UpdateIndustry(UpdateView):
     model=Industry
-    template_name='client/form.html'
+    template_name='industry/form.html'
     fields='__all__'
     success_url='/'
 
@@ -81,3 +84,33 @@ class DeleteServicesCategories(DeleteView):
     success_url='/'
     
 ########## CLIENT CRUD #############
+
+#List Of All client
+
+class DisplayAllClient(ListView):
+    model=Client
+    template_name='client/all_clients.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(DisplayAllClient, self).get_context_data(**kwargs)
+        context['clients']=Client.objects.all()
+        return context
+
+#Create New Clients
+class CreateClient(CreateView):
+    model=Client
+    template_name='client/form.html'
+    fields='__all__'
+    success_url='/'
+    
+#Update Client
+
+class UpdateClient(UpdateView):
+    model=Client
+    template_name='client/updateform.html'
+    fields='__all__'
+    success_url='/'
+    
+class DeleteClient(DeleteView):
+    model=Client
+    success_url='/'
